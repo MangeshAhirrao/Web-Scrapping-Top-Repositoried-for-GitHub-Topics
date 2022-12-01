@@ -45,3 +45,14 @@ topics_df.to_csv('topics.csv', index = None)
 * We have a funciton to get the list of topics
 * We have a function to create a CSV file for scraped repos from a topics page
 * Let's create a function to put them together
+
+```
+def scrape_topics_repos():
+    print('Scraping list of topics')
+    topics_df = scrape_topics()
+    
+    os.makedirs('data', exist_ok=True)
+    for index, row in topics_df.iterrows():
+        print('Scraping top repositories for "{}"'.format(row['title']))
+        scrape_topic(row['url'], 'data/{}.csv'.format(row['title']))
+```
